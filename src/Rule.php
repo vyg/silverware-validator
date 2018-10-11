@@ -226,7 +226,7 @@ abstract class Rule
         // Determine Attribute Type:
 
         if (is_array($this->attribute)) {
-
+            var_dump($this->attribute);
             // Answer Conditional Attribute:
 
             foreach ($this->attribute as $name => $cond) {

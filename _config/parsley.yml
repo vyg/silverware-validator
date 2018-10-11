@@ -17,6 +17,10 @@ SilverWare\Validator\Backends\ParsleyBackend:
       attribute: '$type'
     SilverWare\Validator\Rules\ConditionalRule:
       attribute: 'conditional'
+    SilverWare\Validator\Rules\IfEmptyRule:
+      attribute: 'validate-if-empty'
+    SilverWare\Validator\Rules\DependencyRule:
+      attribute: 'dependent'
     SilverWare\Validator\Rules\DateRule:
       attribute: 'date'
     SilverWare\Validator\Rules\DigitsRule:

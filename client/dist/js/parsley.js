@@ -2593,11 +2593,12 @@ __webpack_require__(6);
 __webpack_require__(7);
 __webpack_require__(11);
 __webpack_require__(12);
-__webpack_require__(14);
+__webpack_require__(13);
+__webpack_require__(15);
 
 // Initialise:
 
-__webpack_require__(13);
+__webpack_require__(14);
 
 /***/ }),
 /* 4 */
@@ -2858,6 +2859,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_parsleyjs__);
+/* Parsley Conditional Validator
+===================================================================================================================== */
+
+
+
+
+// Define Conditioanl Validator:
+__WEBPACK_IMPORTED_MODULE_1_parsleyjs___default.a.addValidator('conditional', {
+  validateString: function validateString(value, requirement) {
+    // $fields = requirement.split(',')
+    console.log(value);
+    console.log(requirement);
+
+    // Valid if
+    // if (value === '') {
+
+    // } else {
+
+    // }
+    var requirementVal = document.querySelector('[name=' + requirement + ']').value;
+    // console.log(requirementVal === '' && value === '')
+    // console.log(requirementVal !== '' && value !== '')
+    // console.log(requirementVal !== '' && value !== '')
+    // console.log(requirementVal)
+    // console.log(value)
+    // console.log(this)
+
+    var field = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('[name=' + requirement + ']').parsley();
+
+    if (requirementVal === '' && value === '') {
+      return true;
+    }
+
+    if (requirementVal !== '' && value !== '') {
+      return true;
+    }
+
+    // field.reset()
+    // console.log(false)
+
+    return false;
+
+    // const condition = !(
+    //   (requirementVal === '' && value === '') ||
+    //   (requirementVal !== '' && value !== '')
+    // )
+
+    // console.log(condition)
+
+    // return condition
+  },
+  priority: 33
+});
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_parsleyjs__);
 /* SilverWare Validator Parsley Init
 ===================================================================================================================== */
 
@@ -2954,28 +3019,98 @@ __WEBPACK_IMPORTED_MODULE_0_jquery___default()(function () {
 });
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_parsleyjs__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_parsleyjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_parsleyjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_parsleyjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_parsleyjs__);
 /* Parsley Conditional Validator
 ===================================================================================================================== */
 
 
 
-// Define Conditioanl Validator:
-__WEBPACK_IMPORTED_MODULE_0_parsleyjs___default.a.addValidator('conditional', {
-  validateString: function validateString(value, requirement) {
-    console.log('validate');
-    console.log(value);
-    console.log(requirement);
 
-    return false;
-  },
-  priority: 1
+// Define Conditioanl Validator:
+// Parsley.addValidator('dependent', {
+//   validateString: function (value, requirement) {
+//     console.log('dependent')
+//     console.log(value)
+//     console.log(requirement)
+//     //
+//     const field = $(`[name=${requirement}]`).parsley()
+//     console.log(field)
+//     field.validate({ group: 'passwords' })
+
+//     if (requirementVal === '' && value === '') {
+//       console.log(true)
+//       field.destroy()
+//       return true
+//     }
+
+//     if (requirementVal !== '' && value !== '') {
+//       console.log(true)
+//       field.destroy()
+//       return true
+//     }
+
+//     field.reset()
+//     return true
+//   },
+//   priority: 33
+// })
+
+// Parsley.on('field:validate', function () {
+//   // This global callback will be called for any field that fails validation.
+//   console.log('Validation for: ', this.$element)
+//   const element = this.$element[0]
+//   console.log(element)
+//   console.log(element.id)
+
+//   if (element.id == 'AccountForm_AccountForm_OldPassword') {
+//     const pw2 = $('#AccountForm_AccountForm_NewPassword2').parsley()
+//     const pw1 = $('#AccountForm_AccountForm_NewPassword1').parsley()
+
+//     if (element.value === '') {
+//       console.log('destroy')
+
+//       pw1.destroy()
+//       pw2.destroy()
+//     } else {
+//       console.log('reset')
+
+//       pw1.reset()
+//       pw2.reset()
+//     }
+//   }
+// })
+
+__WEBPACK_IMPORTED_MODULE_1_parsleyjs___default.a.on('field:validate', function () {
+  var element = this.$element[0];
+  var pw2 = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#AccountForm_AccountForm_NewPassword2');
+  var pw1 = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#AccountForm_AccountForm_NewPassword1');
+
+  if (element.id == 'AccountForm_AccountForm_OldPassword') {
+    if (element.value === '') {
+      pw1.attr('data-parsley-required', false);
+      pw2.attr('data-parsley-required', false);
+    } else {
+      console.log('required');
+
+      pw1.attr('data-parsley-required', true);
+      pw2.attr('data-parsley-required', true);
+    }
+
+    pw1.parsley().reset();
+    pw2.parsley().reset();
+  }
+
+  if (element.id == 'AccountForm_AccountForm_NewPassword1') {
+    pw2.parsley().validate();
+  }
 });
 
 /***/ })

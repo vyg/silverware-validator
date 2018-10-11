@@ -3,12 +3,8 @@
 namespace SilverWare\Validator\Rules;
 
 use SilverWare\Validator\Rule;
-use SilverWare\Validator\Rules\TargetRule;
 
-/**
- * An extension of a conditional
- */
-class ConditionalRule extends Rule
+class DependencyRule extends Rule
 {
     /**
      * Defines the default type for the rule.
@@ -16,7 +12,7 @@ class ConditionalRule extends Rule
      * @var string
      * @config
      */
-    private static $default_type = 'conditional';
+    private static $default_type = 'dependent';
 
     private static $default_format = '{password1}';
 
@@ -66,20 +62,6 @@ class ConditionalRule extends Rule
     }
 
     /**
-     * Defines the value of the pattern attribute.
-     *
-     * @param string $pattern
-     *
-     * @return $this
-     */
-    // public function setConditionalFields($fields)
-    // {
-    //     $this->conditional_fields = (array) $fields;
-
-    //     return $this;
-    // }
-
-    /**
      * Answers the test result of the validator rule on the given value.
      *
      * @param mixed $value
@@ -88,9 +70,7 @@ class ConditionalRule extends Rule
      */
     public function test($value)
     {
-        // var_dump($this->conditional_fields);
-        // die;
-        return false;
+        return true;
     }
 
     /**
@@ -100,6 +80,6 @@ class ConditionalRule extends Rule
      */
     public function getDefaultMessage()
     {
-        return 'This value is conditional';
+        return _t(__CLASS__ . '.DEFAULTMESSAGE', 'Dependent rule');
     }
 }
